@@ -428,7 +428,7 @@ else
 
 default:
 	#$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
-	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) modules_install
+	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) modules
 
 endif
 
