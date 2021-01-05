@@ -16,7 +16,7 @@
 #  this warranty disclaimer.
 #
 
-COMPATDIR=/lib/modules/$(KERNELVERSION_X86)/build/compat-wireless-3.2-rc1-1/include
+COMPATDIR=/STORAGE/naveen/kernel-bundles/mainstrem/linux-imx/lib/modules/build/compat-wireless-3.2-rc1-1/include
 CC=		$(CROSS_COMPILE)gcc -I$(COMPATDIR)
 LD=		$(CROSS_COMPILE)ld
 BACKUP=		/root/backup
@@ -42,7 +42,7 @@ endif
 # n: NO DEBUG
 # 1: Only PRINTM(MMSG,...), PRINTM(MFATAL,...), ...
 # 2: All PRINTM()
-CONFIG_DEBUG=1
+CONFIG_DEBUG=n
 
 # Proc debug file
 CONFIG_PROC_DEBUG=y
@@ -64,7 +64,7 @@ CONFIG_REASSOCIATION=y
 
 
 # Manufacturing firmware support
-CONFIG_MFG_CMD_SUPPORT=y
+CONFIG_MFG_CMD_SUPPORT=n
 
 # OpenWrt support
 CONFIG_OPENWRT_SUPPORT=n
@@ -112,11 +112,17 @@ MODEXT = ko
 ccflags-y += -I$(M)/mlan
 ccflags-y += -DLINUX
 
-KERNEL_SRC ?= /home/balakrishnan/yocto/build/tmp/sysroots/imx6solosabresd/usr/src/kernel
+
+
+
+KERNELVERSION_X86 := 	$(shell uname -r)
+#KERNELVERSION_X86 := 3.14.28
+KERNELDIR ?= /STORAGE/naveen/kernel-bundles/mainstrem/linux-imx/
+#KERNELDIR ?= /STORAGE/naveen/linux-kernel/lib/modules/$(KERNELVERSION_X86)/build
 
 LD += -S
 
-BINDIR = ../bin_sd8801
+BINDIR = bin_sd8801
 APPDIR= $(shell if test -d "mapp"; then echo mapp; fi)
 
 #############################################################################
@@ -427,8 +433,10 @@ sd8xxx-objs := $(MOALOBJS)
 else
 
 default:
-	#$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
-	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) modules
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+
+modules_install:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules_install
 
 endif
 
