@@ -112,12 +112,7 @@ MODEXT = ko
 ccflags-y += -I$(M)/mlan
 ccflags-y += -DLINUX
 
-
-
-
-#KERNELVERSION_X86 := 	$(shell uname -r)
-KERNELVERSION_X86 := 3.14.28iris-imx-production+g43f50a6
-KERNELDIR ?= /home/balakrishnan/yocto/build/tmp/sysroots/imx6solosabresd/usr/src/kernel
+KERNEL_SRC ?= /home/balakrishnan/yocto/build/tmp/sysroots/imx6solosabresd/usr/src/kernel
 
 LD += -S
 
@@ -432,7 +427,8 @@ sd8xxx-objs := $(MOALOBJS)
 else
 
 default:
-	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+	#$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) modules_install
 
 endif
 
