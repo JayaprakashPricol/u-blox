@@ -115,10 +115,9 @@ ccflags-y += -DLINUX
 
 
 
-KERNELVERSION_X86 := 	$(shell uname -r)
-#KERNELVERSION_X86 := 3.14.28
-KERNELDIR ?= /lib/modules/$(KERNELVERSION_X86)/build
-#KERNELDIR ?= /STORAGE/naveen/linuxtesting/lib/modules/$(KERNELVERSION_X86)/build
+#KERNELVERSION_X86 := 	$(shell uname -r)
+KERNELVERSION_X86 := 3.14.28iris-imx-production+g43f50a6
+KERNELDIR ?= /home/balakrishnan/yocto/build/tmp/sysroots/imx6solosabresd/usr/src/kernel
 
 LD += -S
 
